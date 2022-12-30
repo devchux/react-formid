@@ -1,13 +1,13 @@
 import { useForm } from "./hook";
 
 type FormInputs = {
-  email: string;
+  name: string;
   password: string;
 };
 
 export default function App() {
   const { inputs, handleSubmit, errors, handleChange } = useForm({
-    defaultValues: { email: "", password: "" },
+    defaultValues: { name: "", password: "" },
     validation: {
       password: {
         hasMoreThan6Chars: (val) =>
@@ -26,7 +26,7 @@ export default function App() {
   });
   const onSubmit = (data: FormInputs) => console.log(data);
 
-  console.log(inputs.email); // watch input value by passing the name of it
+  console.log(inputs.name); // watch input value by passing the name of it
 
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
@@ -34,8 +34,8 @@ export default function App() {
       {/* register your input into the hook by invoking the "register" function */}
       <input
         defaultValue="test"
-        value={inputs.email}
-        name="email"
+        value={inputs.name}
+        name="name"
         onChange={handleChange}
       />
 
