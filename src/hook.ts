@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useState } from "react";
-import { UseFormTypes } from "./type";
+import { UseFormTypes, ValueOf } from "./type";
 
 export function useForm<Type>({
   defaultValues,
@@ -13,11 +13,7 @@ export function useForm<Type>({
   const [errors, setErrors] =
     useState<{ [x in keyof Type]: boolean }>(errorDefaultValues);
 
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-
+  const onChange = (name: string, value: any) => {
     setErrors({
       ...errors,
       [name]: "",
@@ -29,11 +25,16 @@ export function useForm<Type>({
     });
   };
 
-  const setFieldValue = (name: string, value: string) => {
-    setInputs({
-      ...inputs,
-      [name]: value,
-    });
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const {
+      target: { name, value },
+    } = e;
+
+    onChange(name, value);
+  };
+
+  const setFieldValue = (name: string, value: ValueOf<Type>) => {
+    onChange(name, value);
   };
 
   const handleSubmit = (
