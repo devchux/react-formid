@@ -1,5 +1,5 @@
 {
-  "name": "useform-react",
+  "name": "react-formid",
   "version": "1.0.0",
   "description": "A minimalistic hook for flexible form validations almost like the [React Hook Form](https://github.com/bluebill1049/react-hook-form).",
   "main": "./dist/cjs/index.js",
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devchux/useform-react.git"
+    "url": "git+https://github.com/devchux/react-formid.git"
   },
   "author": "Chukwudi Eze",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/devchux/useform-react/issues"
+    "url": "https://github.com/devchux/react-formid/issues"
   },
-  "homepage": "https://github.com/devchux/useform-react#readme",
+  "homepage": "https://github.com/devchux/react-formid#readme",
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.2.5",

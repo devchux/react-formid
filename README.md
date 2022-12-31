@@ -1,4 +1,4 @@
-# React Use Form
+# React Formid
 
 A minimalistic hook for flexible form validations almost like the [React Hook Form](https://github.com/bluebill1049/react-hook-form).
 
@@ -7,13 +7,13 @@ A minimalistic hook for flexible form validations almost like the [React Hook Fo
 **with NPM**
 
 ```bash
-    npm install react-useform --save
+    npm install react-formid --save
 ```
 
 **with YARN**
 
 ```bash
-    yarn add react-useform
+    yarn add react-formid
 ```
 
 ## Features
@@ -25,7 +25,7 @@ A minimalistic hook for flexible form validations almost like the [React Hook Fo
 ## Quickstart
 
 ```jsx
-import { useForm } from "react-useform";
+import { useForm } from "react-formid";
 
 type FormInputs = {
   name: string,
