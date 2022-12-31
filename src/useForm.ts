@@ -1,7 +1,7 @@
 import { ChangeEventHandler, FormEventHandler, useMemo, useState } from 'react'
 import { UseFormTypes, ValueOf } from './type'
 
-export function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
+function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
   const [inputs, setInputs] = useState<Type>(defaultValues)
   const errorDefaultValues: any = {}
   const defaultTouchedFields: any = {}
@@ -124,3 +124,5 @@ export function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>)
     getFieldProps,
   }
 }
+
+export default useForm

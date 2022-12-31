@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react'
-import { useForm } from '../useForm'
+import { useForm } from '../index'
 
 describe('Test use form hook', () => {
   it('sample test', () => {
