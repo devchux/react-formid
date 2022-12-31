@@ -12,6 +12,7 @@ export function useForm<Type>({
   });
   const [errors, setErrors] =
     useState<{ [x in keyof Type]: boolean }>(errorDefaultValues);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   const onChange = (name: string, value: any) => {
     setErrors({
@@ -37,11 +38,8 @@ export function useForm<Type>({
     onChange(name, value);
   };
 
-  const handleSubmit = (
-    onSubmit: (data: Type) => void
-  ): FormEventHandler<HTMLFormElement> => {
+  const customErrorValidation = () => {
     const err: any = {};
-    let hasError: boolean = false;
     Object.keys(inputs as object).forEach((item: string) => {
       if (validation) {
         Object.values((validation as any)[item] || {}).every((func) => {
@@ -50,7 +48,6 @@ export function useForm<Type>({
           );
           if (typeof errValue === "string") {
             err[item] = errValue;
-            hasError = true;
             return false;
           }
 
@@ -59,9 +56,17 @@ export function useForm<Type>({
       }
     });
 
-    if (hasError)
+    return err;
+  };
+
+  const handleSubmit = (
+    onSubmit: (data: Type) => void
+  ): FormEventHandler<HTMLFormElement> => {
+    const err = customErrorValidation();
+    if (Object.keys(err).length)
       return (e) => {
         e.preventDefault();
+        setHasError(true);
         setErrors({
           ...errors,
           ...err,
@@ -70,9 +75,12 @@ export function useForm<Type>({
 
     return (e) => {
       e.preventDefault();
+      setHasError(false);
       onSubmit(inputs);
     };
   };
+
+  const reset = () => setInputs(defaultValues);
 
   return {
     inputs,
@@ -80,5 +88,8 @@ export function useForm<Type>({
     setFieldValue,
     errors,
     handleSubmit,
+    setInputs,
+    reset,
+    hasError,
   };
 }

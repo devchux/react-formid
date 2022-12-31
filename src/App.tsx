@@ -33,7 +33,6 @@ export default function App() {
     <form onSubmit={handleSubmit(onSubmit)}>
       {/* register your input into the hook by invoking the "register" function */}
       <input
-        defaultValue="test"
         value={inputs.name}
         name="name"
         onChange={handleChange}
