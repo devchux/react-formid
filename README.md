@@ -7,13 +7,13 @@ A minimalistic hook for flexible form validations almost like the [React Hook Fo
 **with NPM**
 
 ```bash
-    npm install coming-soon --save
+    npm install react-useform --save
 ```
 
 **with YARN**
 
 ```bash
-    yarn add coming-soon
+    yarn add react-useform
 ```
 
 ## Features
@@ -25,7 +25,7 @@ A minimalistic hook for flexible form validations almost like the [React Hook Fo
 ## Quickstart
 
 ```jsx
-import { useForm } from "coming-soon";
+import { useForm } from "react-useform";
 
 type FormInputs = {
   name: string,
