@@ -1,5 +1,5 @@
 {
-  "name": "react-useform",
+  "name": "useform-react",
   "version": "1.0.0",
   "description": "A minimalistic hook for flexible form validations almost like the [React Hook Form](https://github.com/bluebill1049/react-hook-form).",
   "main": "./dist/cjs/index.js",
@@ -17,20 +17,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/devchux/react-useform.git"
+    "url": "git+https://github.com/devchux/useform-react.git"
   },
   "author": "Chukwudi Eze",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/devchux/react-useform/issues"
+    "url": "https://github.com/devchux/useform-react/issues"
   },
-  "homepage": "https://github.com/devchux/react-useform#readme",
+  "homepage": "https://github.com/devchux/useform-react#readme",
   "devDependencies": {
     "@testing-library/react": "^13.4.0",
     "@types/jest": "^29.2.5",
     "@types/react": "^18.0.26",
     "@typescript-eslint/eslint-plugin": "^5.47.1",
     "@typescript-eslint/parser": "^5.47.1",
+    "babel-jest": "^29.3.1",
     "eslint": "^8.31.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
