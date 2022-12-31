@@ -112,6 +112,14 @@ export function useForm<Type>({
 
   const reset = () => setInputs(defaultValues);
 
+  const getFieldProps = (inputName: string) => {
+    return {
+      name: inputName,
+      onChange: handleChange,
+      value: (inputs as any)[inputName]
+    };
+  };
+
   return {
     inputs,
     handleChange,
@@ -125,5 +133,6 @@ export function useForm<Type>({
     isDirty,
     dirtyFields,
     touchedFields,
+    getFieldProps,
   };
 }
