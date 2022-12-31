@@ -1,4 +1,4 @@
-# Mini React Hook Form
+# React Use Form
 
 A minimalistic hook for flexible form validations almost like the [React Hook Form](https://github.com/bluebill1049/react-hook-form).
 
