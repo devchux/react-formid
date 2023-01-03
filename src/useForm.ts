@@ -65,7 +65,7 @@ function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
     Object.keys(inputs as object).forEach((item: string) => {
       if (validation) {
         Object.values((validation as any)[item] || {}).every((func) => {
-          const errValue = (func as (value: any) => string | boolean)((inputs as any)[item])
+          const errValue = (func as (value: any, inputs?: Type) => string | boolean)((inputs as any)[item], inputs)
           if (typeof errValue === 'string') {
             err[item] = errValue
             return false
