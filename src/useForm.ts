@@ -86,13 +86,12 @@ function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
                 }
               }
             }
-            return true
-          }
-
-          const errValue = typeof value !== 'boolean' ? value(inputs[item as keyof Type], inputs) : false
-          if (typeof errValue === 'string') {
-            err[item] = errValue
-            return false
+          } else {
+            const errValue = typeof value !== 'boolean' ? value(inputs[item as keyof Type], inputs) : false
+            if (typeof errValue === 'string') {
+              err[item] = errValue
+              return false
+            }
           }
 
           return true
