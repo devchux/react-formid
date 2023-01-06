@@ -64,6 +64,8 @@ export default function App() {
         name="name"
         onChange={handleChange}
       />
+      {errors.name && <span>{errors.name}</span>}
+    
       <input value={inputs.password} name="password" onChange={handleChange} />
       {errors.password && <span>{errors.password}</span>}
 

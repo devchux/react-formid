@@ -66,24 +66,27 @@ function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
       if (validation) {
         Object.entries((validation as ValidationSchema<Type>)[item as keyof Type] || {}).every(([key, value]) => {
           if (key === 'required') {
-            if (typeof value === 'boolean') {
-              if (value) {
-                err[item] = 'Field is required'
-                return false
-              }
-            } else {
-              const errValue = value(inputs[item as keyof Type], inputs)
-
-              if (typeof errValue === 'boolean') {
-                if (errValue) {
+            if (!inputs[item as keyof Type]) {
+              if (typeof value === 'boolean') {
+                if (value) {
                   err[item] = 'Field is required'
                   return false
                 }
               } else {
-                err[item] = errValue
-                return false
+                const errValue = value(inputs[item as keyof Type], inputs)
+
+                if (typeof errValue === 'boolean') {
+                  if (errValue) {
+                    err[item] = 'Field is required'
+                    return false
+                  }
+                } else {
+                  err[item] = errValue
+                  return false
+                }
               }
             }
+            return true
           }
 
           const errValue = typeof value !== 'boolean' ? value(inputs[item as keyof Type], inputs) : false
