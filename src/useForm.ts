@@ -31,7 +31,7 @@ function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
     return !isEmptyObject(dirtyFields)
   }, [dirtyFields])
 
-  const onChange = (name: string, value: any) => {
+  const onChange = (name: keyof Type, value: any) => {
     setErrors({
       ...errors,
       [name]: '',
@@ -53,10 +53,10 @@ function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
       target: { name, value },
     } = e
 
-    onChange(name, value)
+    onChange(name as keyof Type, value)
   }
 
-  const setFieldValue = (name: string, value: ValueOf<Type>) => {
+  const setFieldValue = (name: keyof Type, value: ValueOf<Type>) => {
     onChange(name, value)
   }
 
@@ -68,6 +68,15 @@ function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
           const errValue = (func as (value: any, inputs?: Type) => string | boolean)((inputs as any)[item], inputs)
           if (typeof errValue === 'string') {
             err[item] = errValue
+            return false
+          }
+
+          if (
+            'required' in (validation as any)[item] &&
+            typeof (validation as any)[item]['required'] === 'boolean' &&
+            (validation as any)[item]['required']
+          ) {
+            err[item] = 'Field is required'
             return false
           }
 
