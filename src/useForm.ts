@@ -1,5 +1,5 @@
 import { ChangeEventHandler, FormEventHandler, useMemo, useState } from 'react'
-import { UseFormTypes, ValueOf } from './type'
+import { UseFormTypes, ValidationSchema, ValueOf } from './type'
 
 function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
   const [inputs, setInputs] = useState<Type>(defaultValues)
@@ -64,19 +64,31 @@ function useForm<Type>({ defaultValues, validation }: UseFormTypes<Type>) {
     const err: any = {}
     Object.keys(inputs as object).forEach((item: string) => {
       if (validation) {
-        Object.values((validation as any)[item] || {}).every((func) => {
-          const errValue = (func as (value: any, inputs?: Type) => string | boolean)((inputs as any)[item], inputs)
-          if (typeof errValue === 'string') {
-            err[item] = errValue
-            return false
+        Object.entries((validation as ValidationSchema<Type>)[item as keyof Type] || {}).every(([key, value]) => {
+          if (key === 'required') {
+            if (typeof value === 'boolean') {
+              if (value) {
+                err[item] = 'Field is required'
+                return false
+              }
+            } else {
+              const errValue = value(inputs[item as keyof Type], inputs)
+
+              if (typeof errValue === 'boolean') {
+                if (errValue) {
+                  err[item] = 'Field is required'
+                  return false
+                }
+              } else {
+                err[item] = errValue
+                return false
+              }
+            }
           }
 
-          if (
-            'required' in (validation as any)[item] &&
-            typeof (validation as any)[item]['required'] === 'boolean' &&
-            (validation as any)[item]['required']
-          ) {
-            err[item] = 'Field is required'
+          const errValue = typeof value !== 'boolean' ? value(inputs[item as keyof Type], inputs) : false
+          if (typeof errValue === 'string') {
+            err[item] = errValue
             return false
           }
 

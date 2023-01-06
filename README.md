@@ -36,6 +36,9 @@ export default function App() {
   const { inputs, handleSubmit, errors, handleChange } = useForm({
     defaultValues: { name: "", password: "" },
     validation: {
+      name: {
+        required: true,
+      },
       password: {
         hasMoreThan6Chars: (val) =>
           val.length >= 6 || "Please enter 6 or more characters",
